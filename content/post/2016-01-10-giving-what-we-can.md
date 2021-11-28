@@ -4,7 +4,6 @@ date: 2016-01-10 16:06:43
 layout: post
 aliases: [/2016/01/10/giving-what-we-can]
 category: philosophy
-permalink: 'giving-what-we-can'
 ---
 
 I've finally taken the [Giving What We Can​ pledge](https://www.givingwhatwecan.org/pledge/) – a commitment to give away (at least) 10% of my income to the most effective charities in the world.
