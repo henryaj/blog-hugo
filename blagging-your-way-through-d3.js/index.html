@@ -1,0 +1,187 @@
+<!doctype html><html lang=en>
+<head>
+<title>
+Blagging your way through d3.js ::
+Henry Stanley
+</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="With twelve weeks to do whatever programming projects I wanted, I figure now is the time to try something I&amp;rsquo;ve never touched before.
+Data visualisation is totally foreign to me (at least, anything beyond charts in Excel is). I was aware of d3.js, a JavaScript library for graphing data, so I thought I&amp;rsquo;d try it out.
+Turns out it&amp;rsquo;s not a &amp;ldquo;library for graphing data&amp;rdquo; at all. It&amp;rsquo;s really a DOM manipulation library, or a library for processing data and using it to update elements on a webpage.">
+<meta name=keywords content>
+<meta name=robots content="noodp">
+<link rel=canonical href=https://henrystanley.com/blagging-your-way-through-d3.js/>
+<link rel=stylesheet href=https://henrystanley.com/assets/style.css>
+<link rel=stylesheet href=https://henrystanley.com/style.css>
+<link rel=apple-touch-icon-precomposed sizes=144x144 href=https://henrystanley.com/img/apple-touch-icon-144-precomposed.png>
+<link rel="shortcut icon" href=https://henrystanley.com/img/favicon.png>
+<link href=https://henrystanley.com/assets/fonts/Inter-Italic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Regular.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Medium.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-MediumItalic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Bold.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-BoldItalic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Blagging your way through d3.js">
+<meta name=twitter:description content="With twelve weeks to do whatever programming projects I wanted, I figure now is the time to try something I&rsquo;ve never touched before.
+Data visualisation is totally foreign to me (at least, anything beyond charts in Excel is). I was aware of d3.js, a JavaScript library for graphing data, so I thought I&rsquo;d try it out.
+Turns out it&rsquo;s not a &ldquo;library for graphing data&rdquo; at all. It&rsquo;s really a DOM manipulation library, or a library for processing data and using it to update elements on a webpage.">
+<meta property="og:title" content="Blagging your way through d3.js">
+<meta property="og:description" content="With twelve weeks to do whatever programming projects I wanted, I figure now is the time to try something I&rsquo;ve never touched before.
+Data visualisation is totally foreign to me (at least, anything beyond charts in Excel is). I was aware of d3.js, a JavaScript library for graphing data, so I thought I&rsquo;d try it out.
+Turns out it&rsquo;s not a &ldquo;library for graphing data&rdquo; at all. It&rsquo;s really a DOM manipulation library, or a library for processing data and using it to update elements on a webpage.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://henrystanley.com/blagging-your-way-through-d3.js/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-06-13T17:00:00-04:00">
+<meta property="article:modified_time" content="2018-06-13T17:00:00-04:00"><meta property="og:site_name" content="Henry Stanley">
+</head>
+<body>
+<div class=container>
+<header class=header>
+<span class=header__inner>
+<a href=/ class=logo style=text-decoration:none>
+<span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg>
+</span>
+<span class=logo__text>Henry Stanley</span>
+<span class=logo__cursor></span>
+</a>
+<span class=header__right>
+<nav class=menu>
+<ul class="menu__inner menu__inner--desktop">
+<li><a href=/post>Archive</a></li>
+</ul>
+<ul class="menu__inner menu__inner--mobile">
+<li><a href=/post>Archive</a></li>
+</ul>
+</nav>
+<span class=menu-trigger><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+</span>
+<span class=theme-toggle><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 41c10.4934.0 19-8.5066 19-19C41 11.5066 32.4934 3 22 3 11.5066 3 3 11.5066 3 22s8.5066 19 19 19zM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22z"/></svg>
+</span>
+</span>
+</span>
+</header>
+<div class=content>
+<div class=post>
+<h1 class=post-title>Blagging your way through d3.js</h1>
+<div class=post-meta>
+<span class=post-date>
+2018-06-13
+</span>
+<span class=post-read-time>— 4 min read</span>
+</div>
+<div class=post-content>
+<p>With <a href=https://recurse.com>twelve weeks</a> to do whatever programming projects I wanted, I figure now is the time to try something I&rsquo;ve never touched before.</p>
+<p>Data visualisation is totally foreign to me (at least, anything beyond charts in Excel is). I was aware of <a href=https://d3js.org/>d3.js</a>, a JavaScript library for graphing data, so I thought I&rsquo;d try it out.</p>
+<p>Turns out it&rsquo;s not a &ldquo;library for graphing data&rdquo; at all. It&rsquo;s really a <em>DOM manipulation library</em>, or a library for processing data and using it to update elements on a webpage.</p>
+<p>That confusion was probably why I found it so damn hard to get it to actually <em>do</em> anything I wanted.</p>
+<h1 id=getting-started>Getting started</h1>
+<p>Almost always, when you&rsquo;re starting out with d3, you ask it to create an SVG element on a webpage. This becomes the canvas on which you paint everything else.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>width</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>800</span>
+<span style=color:#66d9ef>let</span> <span style=color:#a6e22e>height</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>400</span>
+
+<span style=color:#66d9ef>let</span> <span style=color:#a6e22e>svg</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>d3</span>.<span style=color:#a6e22e>select</span>(<span style=color:#a6e22e>DOM</span>.<span style=color:#a6e22e>svg</span>(<span style=color:#a6e22e>width</span>, <span style=color:#a6e22e>height</span>))
+</code></pre></div><p>We&rsquo;ve now bound a <a href=https://github.com/d3/d3-selection/blob/a551afef97a6955d01728c1382c2da833077fb36/src/selection/index.js#L43><code>Selection</code></a> to the <code>svg</code> variable. <code>Selection</code> has a bunch of methods defined on it which we can use to manipulate the underlying DOM element (an <code>&lt;svg></code> HTML object, in this case).</p>
+<h1 id=grouping-elements>Grouping elements</h1>
+<p>The SVG standard defines a <a href=https://developer.mozilla.org/en-US/docs/Web/SVG/Element/g><code>&lt;g> element</code></a>, a very boring container element used to group things together. A bit like HTML&rsquo;s <code>&lt;div></code>. You can also define attributes on a <code>&lt;g></code> tag and its child elements will inherit them.</p>
+<h1 id=drawing-elements>Drawing elements</h1>
+<p>Okay, we&rsquo;re ready to get something onto the page. Here we go:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#a6e22e>svg</span>.<span style=color:#a6e22e>append</span>(<span style=color:#e6db74>&#34;g&#34;</span>)     <span style=color:#75715e>// put a &lt;g&gt; element inside the &lt;svg&gt;
+</span><span style=color:#75715e></span>    .<span style=color:#a6e22e>selectAll</span>(<span style=color:#e6db74>&#34;rect&#34;</span>) <span style=color:#75715e>// select all &lt;rect&gt; elements inside the &lt;g&gt;
+</span><span style=color:#75715e></span>    .<span style=color:#a6e22e>data</span>([
+        {<span style=color:#a6e22e>x</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>1</span>, <span style=color:#a6e22e>y</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>1</span>},
+        {<span style=color:#a6e22e>x</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>2</span>, <span style=color:#a6e22e>y</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>2</span>},
+        {<span style=color:#a6e22e>x</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>3</span>, <span style=color:#a6e22e>y</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>4</span>},
+        {<span style=color:#a6e22e>x</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>4</span>, <span style=color:#a6e22e>y</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>8</span>},
+    ])              <span style=color:#75715e>// for this set of data points...
+</span><span style=color:#75715e></span>    .<span style=color:#a6e22e>enter</span>()        <span style=color:#75715e>// when any new data points are added...
+</span><span style=color:#75715e></span>    .<span style=color:#a6e22e>append</span>(<span style=color:#e6db74>&#34;rect&#34;</span>) <span style=color:#75715e>// add a new &lt;g&gt; element with these attributes:
+</span><span style=color:#75715e></span>    .<span style=color:#a6e22e>attr</span>(<span style=color:#e6db74>&#34;fill&#34;</span>, <span style=color:#e6db74>&#34;blue&#34;</span>)
+    .<span style=color:#a6e22e>attr</span>(<span style=color:#e6db74>&#34;x&#34;</span>, <span style=color:#a6e22e>xPosition</span>(<span style=color:#a6e22e>d</span>))
+    .<span style=color:#a6e22e>attr</span>(<span style=color:#e6db74>&#34;y&#34;</span>, <span style=color:#a6e22e>yPosition</span>(<span style=color:#a6e22e>d</span>))
+    .<span style=color:#a6e22e>attr</span>(<span style=color:#e6db74>&#34;width&#34;</span>, <span style=color:#ae81ff>50</span>)
+    .<span style=color:#a6e22e>attr</span>(<span style=color:#e6db74>&#34;height&#34;</span>, <span style=color:#ae81ff>50</span>)
+</code></pre></div><p>That&rsquo;s a lot of stuff to draw some squares on a page. Let&rsquo;s break it down further.</p>
+<h2 id=append-selectall-and-enter>append, selectAll and enter</h2>
+<p>Here&rsquo;s what&rsquo;s happening in the above code snippet.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#a6e22e>svg</span>.<span style=color:#a6e22e>append</span>(<span style=color:#e6db74>&#34;g&#34;</span>)
+</code></pre></div><blockquote>
+<p>This inserts a <code>&lt;g></code> element into the element represented by the caller (in this case, we&rsquo;re putting our new <code>&lt;g></code> element inside an <code>&lt;svg></code>).</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js>    .<span style=color:#a6e22e>selectAll</span>(<span style=color:#e6db74>&#34;rect&#34;</span>)
+</code></pre></div><blockquote>
+<p>Selects all the <code>&lt;rect></code> elements inside the new <code>&lt;g></code> element. In the first instance, there won&rsquo;t be any such elements, so we get an empty list. That&rsquo;s fine.</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js>    .<span style=color:#a6e22e>data</span>([...])
+</code></pre></div><blockquote>
+<p>Specifies some data to work with.</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js>    .<span style=color:#a6e22e>enter</span>()
+    .<span style=color:#a6e22e>append</span>(<span style=color:#e6db74>&#34;rect&#34;</span>)
+    .<span style=color:#a6e22e>attr</span>(<span style=color:#e6db74>&#34;fill&#34;</span>, <span style=color:#e6db74>&#34;blue&#34;</span>)
+    .<span style=color:#a6e22e>attr</span>(<span style=color:#e6db74>&#34;x&#34;</span>, <span style=color:#a6e22e>xPosition</span>(<span style=color:#a6e22e>d</span>))
+    .<span style=color:#a6e22e>attr</span>(<span style=color:#e6db74>&#34;y&#34;</span>, <span style=color:#a6e22e>yPosition</span>(<span style=color:#a6e22e>d</span>))
+    .<span style=color:#a6e22e>attr</span>(<span style=color:#e6db74>&#34;width&#34;</span>, <span style=color:#ae81ff>50</span>)
+    .<span style=color:#a6e22e>attr</span>(<span style=color:#e6db74>&#34;height&#34;</span>, <span style=color:#ae81ff>50</span>)
+</code></pre></div><blockquote>
+<p>And now the magic: take our data, and <em>whenever a new data point <code>.enter()</code>s the dataset</em>, append a new <code>&lt;rect></code> with properties (blue, 50 x 50, etc).</p>
+</blockquote>
+<p>You may have guessed that <code>.enter</code> has <code>.exit</code> and <code>.update</code> counterparts, for defining actions to take when data points leave the set or are updated.</p>
+<p>The thinking behind this API is that it&rsquo;s much more straightforward to <a href=https://bost.ocks.org/mike/join/>declaratively tell d3 <em>what you want</em> rather than how to render it</a>. This makes all sorts of crazy stuff trivial: live data updates, real-time charts, and interactive visualisations.</p>
+<h2 id=scaling-data>Scaling data</h2>
+<p>When we set the co-ordinates for our beautiful blue rectangles, we call <code>xPosition</code> or <code>yPosition</code> on the data point. These functions might look something like this:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>xPosition</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>d3</span>.<span style=color:#a6e22e>scaleLinear</span>()
+  	.<span style=color:#a6e22e>domain</span>([<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>4</span>])
+  	.<span style=color:#a6e22e>range</span>([<span style=color:#ae81ff>0</span><span style=color:#f92672>+</span><span style=color:#a6e22e>margin</span>, <span style=color:#a6e22e>width</span><span style=color:#f92672>-</span><span style=color:#a6e22e>margin</span>]);
+</code></pre></div><p>By calling <code>d3.scaleLinear</code>, we get a function which will take a number and scale it up or down to something more appropriate. <code>domain</code> describes the data domain, and <code>range</code> is the desired range that data should fill. Here, the domain is numbers between 1 and 4, and the range is any value that would put the <em>x</em> co-ordinate of our <code>&lt;rect></code> inside the SVG (with a little bit of padding).</p>
+<p><code>yPosition</code> does something similar, but for the <em>y</em> co-ordinate. SVG has a quirk, though: <em>y</em> co-ordinates go from <em>top to bottom</em> (so the top of the element is zero).</p>
+<h1 id=why-is-this-so-hard-i-just-want-a-pie-chart>Why is this so hard I just want a pie chart</h1>
+<p>The above is actually most of what you need to build something with d3 (though what I&rsquo;ve described barely scratches the surface of what&rsquo;s possible) – just don&rsquo;t expect the library to do much for you.</p>
+<p>In my experience, going through examples of d3 visualisations written by other people (read: <a href=https://bost.ocks.org/mike/>Mike Bostock</a>) is the best way to find inspiration.</p>
+<p>More concretely, you might find that the higher-level abstractions offered by some of <a href=https://github.com/wbkd/awesome-d3>these awesome libraries</a> is easier for getting started.</p>
+<p><em>In part 2, I&rsquo;ll write about my attempts to visualise large numbers using d3 and <a href=http://https://beta.observablehq.com/>Observable</a>.</em></p>
+</div>
+<div class=pagination>
+<div class=pagination__title>
+<span class=pagination__title-h>Read other posts</span>
+<hr>
+</div>
+<div class=pagination__buttons>
+<span class="button previous">
+<a href=https://henrystanley.com/scope-insensitivity-and-d3.js/>
+<span class=button__icon>←</span>
+<span class=button__text>Scope insensitivity and d3.js</span>
+</a>
+</span>
+<span class="button next">
+<a href=https://henrystanley.com/hey-cochrane-quick-answers-to-medical-questions/>
+<span class=button__text>Hey, Cochrane - quick answers to medical questions</span>
+<span class=button__icon>→</span>
+</a>
+</span>
+</div>
+</div>
+</div>
+</div>
+<footer class=footer>
+<div class=footer__inner>
+<a href=/ class=logo style=text-decoration:none>
+<span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg>
+</span>
+<span class=logo__text>Henry Stanley</span>
+<span class=logo__cursor></span>
+</a>
+<div class=copyright>
+<span>© 2021 Powered by
+<a href=https://gohugo.io target=_blank rel=noopener>Hugo</a></span>
+<span>Theme created by
+<a href=https://twitter.com/panr target=_blank rel=noopener>panr</a></span>
+</div>
+</div>
+</footer>
+<script src=https://henrystanley.com/assets/main.js></script>
+<script src=https://henrystanley.com/assets/prism.js></script>
+</div>
+</body>
+</html>

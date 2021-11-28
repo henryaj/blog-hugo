@@ -1,0 +1,167 @@
+<!doctype html><html lang=en>
+<head>
+<title>
+A Buildpack for GraalVM ::
+Henry Stanley
+</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="tl;dr: Deploy your Ruby code to Heroku and have it run on GraalVM.
+When deploying code in this brave new cloud world we live in, your app pretty much runs as a brain in a vat. It doesn&amp;rsquo;t (and shouldn&amp;rsquo;t) know about the hardware it&amp;rsquo;s running on, how the services it connects to are implemented, how it send data to your log aggregation tool, and so on.1
+You get to choose between providing the brain and the vat, or just the brain.">
+<meta name=keywords content>
+<meta name=robots content="noodp">
+<link rel=canonical href=https://henrystanley.com/a-buildpack-for-graalvm/>
+<link rel=stylesheet href=https://henrystanley.com/assets/style.css>
+<link rel=stylesheet href=https://henrystanley.com/style.css>
+<link rel=apple-touch-icon-precomposed sizes=144x144 href=https://henrystanley.com/img/apple-touch-icon-144-precomposed.png>
+<link rel="shortcut icon" href=https://henrystanley.com/img/favicon.png>
+<link href=https://henrystanley.com/assets/fonts/Inter-Italic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Regular.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Medium.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-MediumItalic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Bold.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-BoldItalic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="A Buildpack for GraalVM">
+<meta name=twitter:description content="tl;dr: Deploy your Ruby code to Heroku and have it run on GraalVM.
+When deploying code in this brave new cloud world we live in, your app pretty much runs as a brain in a vat. It doesn&rsquo;t (and shouldn&rsquo;t) know about the hardware it&rsquo;s running on, how the services it connects to are implemented, how it send data to your log aggregation tool, and so on.1
+You get to choose between providing the brain and the vat, or just the brain.">
+<meta property="og:title" content="A Buildpack for GraalVM">
+<meta property="og:description" content="tl;dr: Deploy your Ruby code to Heroku and have it run on GraalVM.
+When deploying code in this brave new cloud world we live in, your app pretty much runs as a brain in a vat. It doesn&rsquo;t (and shouldn&rsquo;t) know about the hardware it&rsquo;s running on, how the services it connects to are implemented, how it send data to your log aggregation tool, and so on.1
+You get to choose between providing the brain and the vat, or just the brain.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://henrystanley.com/a-buildpack-for-graalvm/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-08-09T12:30:43-04:00">
+<meta property="article:modified_time" content="2018-08-09T12:30:43-04:00"><meta property="og:site_name" content="Henry Stanley">
+</head>
+<body>
+<div class=container>
+<header class=header>
+<span class=header__inner>
+<a href=/ class=logo style=text-decoration:none>
+<span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg>
+</span>
+<span class=logo__text>Henry Stanley</span>
+<span class=logo__cursor></span>
+</a>
+<span class=header__right>
+<nav class=menu>
+<ul class="menu__inner menu__inner--desktop">
+<li><a href=/post>Archive</a></li>
+</ul>
+<ul class="menu__inner menu__inner--mobile">
+<li><a href=/post>Archive</a></li>
+</ul>
+</nav>
+<span class=menu-trigger><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+</span>
+<span class=theme-toggle><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 41c10.4934.0 19-8.5066 19-19C41 11.5066 32.4934 3 22 3 11.5066 3 3 11.5066 3 22s8.5066 19 19 19zM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22z"/></svg>
+</span>
+</span>
+</span>
+</header>
+<div class=content>
+<div class=post>
+<h1 class=post-title>A Buildpack for GraalVM</h1>
+<div class=post-meta>
+<span class=post-date>
+2018-08-09
+</span>
+<span class=post-read-time>— 4 min read</span>
+</div>
+<div class=post-content>
+<p>tl;dr: Deploy your Ruby code to Heroku and have it run on GraalVM.</p>
+<p>When deploying code in this brave new cloud world we live in, your app pretty much runs as a brain in a vat. It doesn&rsquo;t (and shouldn&rsquo;t) know about the hardware it&rsquo;s running on, how the services it connects to are implemented, how it send data to your log aggregation tool, and so on.<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup></p>
+<p>You get to choose between providing the brain <em>and</em> the vat, or just the brain.</p>
+<p>The brain-and-vat option is a <em>container</em>. This lets you specify pretty much everything you want to run: the OS, all the libraries and utilities installed on that OS, and the app code itself. This is what running a <a href=http://docker.com>Docker</a> container looks like (e.g. on Kubernetes or ECS).</p>
+<p>The brain-only option is what <a href=http://heroku.com>Heroku</a> and <a href=http://cloudfoundry.org>Cloud Foundry</a> offer. For clarification, please refer to <a href=https://twitter.com/onsijoe/status/598235841635360768>this helpful haiku</a>:</p>
+<blockquote>
+<p>Here is my source code
+Run it in the cloud for me
+I do not care how</p>
+</blockquote>
+<p>Those platforms take your code, figure out what the hell it is, and then run it for you. In addition to not needing to provide (or even really think about) an OS, it also lets whoever&rsquo;s running your platform make fixes to your app. If a vulnerability is discovered in some system library, for example, the platform operations team can just swap out the base OS for a patched version. If you&rsquo;ve provided them a container to run, though, it&rsquo;s just an opaque blob &ndash; you need to update the image on which your container is based and then rebuild it.</p>
+<p>So how do the brain-only providers figure out what you want to run?</p>
+<h2 id=buildpacks>Buildpacks</h2>
+<p>These are chunks of code that decide:</p>
+<ol>
+<li>what kind of app your app is</li>
+<li>how to compile it into something executable</li>
+<li>how to run that executable</li>
+</ol>
+<p>These three stages map nicely to the <a href=https://devcenter.heroku.com/articles/buildpack-api>three executables that must be present in a buildpack</a>:</p>
+<ul>
+<li><code>bin/detect</code></li>
+<li><code>bin/compile</code></li>
+<li><code>bin/release</code></li>
+</ul>
+<h3 id=detect>Detect</h3>
+<p>Decides what kind of app you&rsquo;re running. For Ruby, this might be as simple as asking &ldquo;does it have a Gemfile?&rdquo;.</p>
+<p>If yes, continue with the compile and release steps. Otherwise, try another buildpack until there are no more left.</p>
+<h3 id=compile>Compile</h3>
+<p>Turns your app into an executable (a &lsquo;slug&rsquo; in Heroku parlance; a &lsquo;droplet&rsquo; in Cloud Foundry parlance). For Ruby, this means running <code>bundle install</code>; for Go, this means <code>dep ensure && go build</code>, etc.</p>
+<h3 id=release>Release</h3>
+<p>Write a <code>Procfile</code> that tells the system how to run your app (e.g. <code>rails server</code>, <code>rackup</code>, <code>npm start</code> etc.)</p>
+<h2 id=graalvm>GraalVM</h2>
+<p>GraalVM is a VM and a set of interpreters capable of taking various kinds of code (Ruby, Python, R, LLVM bitcode, C, languages that target the JVM like Java and Scala) converting them into some intermediate representation, and running them on a highly-optimised VM (itself written in Java).</p>
+<p>It&rsquo;s been in development for several years, and is capable of running Ruby code four times faster than the next-best runtime, provides hooks to debug your code using Chrome DevTools, and provides seamless interoperability between any of these languages with almost zero overhead.</p>
+<p>So why can&rsquo;t I push my Ruby code to Heroku and have it run on GraalVM?</p>
+<h3 id=instructionsa-idinstructionsa>Instructions</h3>
+<p>The source code is <a href=https://github.com/henryaj/truffleruby-buildpack>here</a>.</p>
+<p><strong>To use on Heroku</strong>: run <code>heroku buildpacks:add</code> to add this buildpack to your app, and remove the existing Ruby buildpack. You&rsquo;ll need to have pushed your app at least once before to do this.</p>
+<p><strong>To use on Cloud Foundry</strong>: run <code>cf create-buildpack</code> to add this buildpack to CF, then update the buildpack order to ensure it runs before the normal Ruby buildpack.</p>
+<p>It&rsquo;s pretty bare bones at the moment – it won&rsquo;t build your Rails asset cache, for example – but it should be okay at getting basic Ruby apps running. Note that <a href=https://github.com/oracle/truffleruby/blob/master/README.md#current-status>TruffleRuby is still incomplete</a>, and is missing support for some important Ruby features (native gems won&rsquo;t work, for example), so YMMV.</p>
+<section class=footnotes role=doc-endnotes>
+<hr>
+<ol>
+<li id=fn:1 role=doc-endnote>
+<p>These principles are all lifted from the concept of <a href=https://12factor.net/>12-factor apps</a>, which are apps that have a clean contract with the underlying OS, and are designed to be portable across clouds.&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</div>
+<div class=pagination>
+<div class=pagination__title>
+<span class=pagination__title-h>Read other posts</span>
+<hr>
+</div>
+<div class=pagination__buttons>
+<span class="button previous">
+<a href=https://henrystanley.com/boris-johnson-addresses-the-masses/>
+<span class=button__icon>←</span>
+<span class=button__text>Boris Johnson addresses the masses</span>
+</a>
+</span>
+<span class="button next">
+<a href=https://henrystanley.com/getting-started-with-graal/>
+<span class=button__text>Getting started with Graal</span>
+<span class=button__icon>→</span>
+</a>
+</span>
+</div>
+</div>
+</div>
+</div>
+<footer class=footer>
+<div class=footer__inner>
+<a href=/ class=logo style=text-decoration:none>
+<span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg>
+</span>
+<span class=logo__text>Henry Stanley</span>
+<span class=logo__cursor></span>
+</a>
+<div class=copyright>
+<span>© 2021 Powered by
+<a href=https://gohugo.io target=_blank rel=noopener>Hugo</a></span>
+<span>Theme created by
+<a href=https://twitter.com/panr target=_blank rel=noopener>panr</a></span>
+</div>
+</div>
+</footer>
+<script src=https://henrystanley.com/assets/main.js></script>
+<script src=https://henrystanley.com/assets/prism.js></script>
+</div>
+</body>
+</html>

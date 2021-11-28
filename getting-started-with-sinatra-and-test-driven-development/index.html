@@ -1,0 +1,165 @@
+<!doctype html><html lang=en>
+<head>
+<title>
+Getting started with Sinatra and test-driven development ::
+Henry Stanley
+</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Sinatra is a DSL (domain-specific language, or a language written for a specific purpose) for building web applications. It can be confusing. If you&amp;rsquo;re a beginner programmer fiddling around with Ruby, the single-user terminal apps you&amp;rsquo;ve been writing are suddenly up on the web for everyone to see, and they need to behave differently as a result.
+require &amp;#39;sinatra&amp;#39; get &amp;#39;/&amp;#39; do &amp;#39;hello world!&amp;#39; end If you want to run this and get it working, save this into a file (say server.">
+<meta name=keywords content>
+<meta name=robots content="noodp">
+<link rel=canonical href=https://henrystanley.com/getting-started-with-sinatra-and-test-driven-development/>
+<link rel=stylesheet href=https://henrystanley.com/assets/style.css>
+<link rel=stylesheet href=https://henrystanley.com/style.css>
+<link rel=apple-touch-icon-precomposed sizes=144x144 href=https://henrystanley.com/img/apple-touch-icon-144-precomposed.png>
+<link rel="shortcut icon" href=https://henrystanley.com/img/favicon.png>
+<link href=https://henrystanley.com/assets/fonts/Inter-Italic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Regular.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Medium.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-MediumItalic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Bold.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-BoldItalic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Getting started with Sinatra and test-driven development">
+<meta name=twitter:description content="Sinatra is a DSL (domain-specific language, or a language written for a specific purpose) for building web applications. It can be confusing. If you&rsquo;re a beginner programmer fiddling around with Ruby, the single-user terminal apps you&rsquo;ve been writing are suddenly up on the web for everyone to see, and they need to behave differently as a result.
+require 'sinatra' get '/' do 'hello world!' end If you want to run this and get it working, save this into a file (say server.">
+<meta property="og:title" content="Getting started with Sinatra and test-driven development">
+<meta property="og:description" content="Sinatra is a DSL (domain-specific language, or a language written for a specific purpose) for building web applications. It can be confusing. If you&rsquo;re a beginner programmer fiddling around with Ruby, the single-user terminal apps you&rsquo;ve been writing are suddenly up on the web for everyone to see, and they need to behave differently as a result.
+require 'sinatra' get '/' do 'hello world!' end If you want to run this and get it working, save this into a file (say server.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://henrystanley.com/getting-started-with-sinatra-and-test-driven-development/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2014-10-16T10:08:14+00:00">
+<meta property="article:modified_time" content="2014-10-16T10:08:14+00:00"><meta property="og:site_name" content="Henry Stanley">
+</head>
+<body>
+<div class=container>
+<header class=header>
+<span class=header__inner>
+<a href=/ class=logo style=text-decoration:none>
+<span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg>
+</span>
+<span class=logo__text>Henry Stanley</span>
+<span class=logo__cursor></span>
+</a>
+<span class=header__right>
+<nav class=menu>
+<ul class="menu__inner menu__inner--desktop">
+<li><a href=/post>Archive</a></li>
+</ul>
+<ul class="menu__inner menu__inner--mobile">
+<li><a href=/post>Archive</a></li>
+</ul>
+</nav>
+<span class=menu-trigger><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+</span>
+<span class=theme-toggle><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 41c10.4934.0 19-8.5066 19-19C41 11.5066 32.4934 3 22 3 11.5066 3 3 11.5066 3 22s8.5066 19 19 19zM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22z"/></svg>
+</span>
+</span>
+</span>
+</header>
+<div class=content>
+<div class=post>
+<h1 class=post-title>Getting started with Sinatra and test-driven development</h1>
+<div class=post-meta>
+<span class=post-date>
+2014-10-16
+</span>
+<span class=post-read-time>— 4 min read</span>
+</div>
+<div class=post-content>
+<p><strong>Sinatra</strong> is a DSL (<em>domain-specific language</em>, or a language written for a specific purpose) for building web applications. It can be confusing. If you&rsquo;re a beginner programmer fiddling around with Ruby, the single-user terminal apps you&rsquo;ve been writing are suddenly up on the web for everyone to see, and they need to behave differently as a result.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby>require <span style=color:#e6db74>&#39;sinatra&#39;</span>
+get <span style=color:#e6db74>&#39;/&#39;</span> <span style=color:#66d9ef>do</span>
+  <span style=color:#e6db74>&#39;hello world!&#39;</span>
+<span style=color:#66d9ef>end</span>
+</code></pre></div><p>If you want to run this and get it working, save this into a file (say <code>server.rb</code>), go to that directory and run <code>ruby server.rb</code> (you&rsquo;ll need Ruby installed on your machine, naturally). This code, specifically the bit between <code>get</code> and <code>end</code> (called the <em>controller</em>) will intercept an HTTP GET request sent to &lsquo;/&rsquo;, and reply with &lsquo;hello world!&rsquo; in plain text. Simple.</p>
+<h2 id=routes>Routes</h2>
+<p>In the above example, &lsquo;/&rsquo; is the <em>route</em>. You can define a bunch of other routes, too. For example:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby>get <span style=color:#e6db74>&#39;/hi&#39;</span> <span style=color:#66d9ef>do</span>
+  <span style=color:#e6db74>&#34;&lt;h1&gt;Hello Makers!&lt;/h1&gt;&#34;</span>
+<span style=color:#66d9ef>end</span>
+</code></pre></div><p>Now, accessing the website path <code>/hi</code> will yield the above message (which in this case will appear big and bold on the page, as we have wrapped it in <code>h1</code> tags.)</p>
+<h2 id=testing-with-cucumber>Testing with Cucumber</h2>
+<p><a href=http://cukes.info>Cucumber</a> is used for <em>acceptance testing</em> – it acts as if it were a person using the application to make sure it works. You can use Cucumber with Sinatra by using the <a href=https://github.com/bernd/cucumber-sinatra>cucumber-sinatra gem</a>. Get started by running:</p>
+<pre tabindex=0><code>$ cucumber-sinatra init --app SampleApp lib/sample_app.rb
+$ rackup
+</code></pre><p>Run your Cucumber tests from the command line with <code>$ cucumber</code>. Now, let&rsquo;s describe a feature using Cucumber:</p>
+<pre tabindex=0><code>$ mkdir feature $ touch homepage.feature
+</code></pre><pre tabindex=0><code>Feature: The homepage
+  In order to show off Cucumber I want to present Cucumber
+</code></pre><p>This will run, but doesn&rsquo;t have any actual tests (or <em>scenarios</em>). Let&rsquo;s add some in the same file.</p>
+<pre tabindex=0><code>Scenario: Being greeted
+  Given I am a site visitor
+  When I am on the homepage
+  Then I should see &quot;Hello hello!&quot;
+</code></pre><p>This <code>Given</code>/<code>When</code>/<code>Then</code> notation is particular to Cucumber (or specifically Gherkin, the language Cucumber is written in). For each step, you write a step definition in Ruby. cucumber-sinatra has some built in step definitions, so you can write some steps without needing to define them (like <code>When I am on the homepage</code>). These built-in definitions live in <code>features/step_definitions/</code>, and there are support files in <code>support/</code> which do things like substituting &lsquo;homepage&rsquo; for &lsquo;/&rsquo;. Cucumber also uses a language called <a href=https://github.com/jnicklas/capybara>Capybara</a>, which can interact with a webpage &ndash; filling in forms, clicking links, looking for specific page content, and so on. <strong>Consider deleting <code>features/step_definitions/web_steps.rb</code> to get some practice in writing your own step definitions</strong>, which also makes the whole thing seem less like magic and gives you a better understanding of how Cucumber matches up your tests with Capybara methods behind the scenes.</p>
+<h2 id=running-the-damn-thing>Running the damn thing</h2>
+<p>Get your server up and running by typing</p>
+<pre tabindex=0><code>$ rackup
+</code></pre><p>What this command <em>actually does</em> is read through your <code>sample_app.rb</code> file, looks at the various routes you&rsquo;ve set, and creates a <em>routing table</em> from it. Then it starts an HTTP server on a particular port and makes it available for connections.</p>
+<h2 id=config>Config</h2>
+<p>Look at the following code from the <a href=http://www.sinatrarb.com/configuration.html>Sinatra documentation</a>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby>set <span style=color:#e6db74>:views</span>, <span style=color:#66d9ef>Proc</span><span style=color:#f92672>.</span>new { <span style=color:#66d9ef>File</span><span style=color:#f92672>.</span>join(root, <span style=color:#e6db74>&#34;templates&#34;</span>) }
+</code></pre></div><p>Why do it this way? Seems kinda convoluted. The reason this is so important is that it bases the path to your <code>views</code> directory on the site root. If you ran <code>rackup</code> from a different directory and you&rsquo;d hard-coded the views path, then it would break – it wouldn&rsquo;t be able to find views relative to where you&rsquo;re running the server file from. Using <code>root</code> gives a salient point that your site is always run from.</p>
+<h2 id=sessions>Sessions</h2>
+<p>HTTP by nature is <em>stateless</em> &ndash; so it doesn&rsquo;t recognise repeat visitors, or even visitors across pages. A lot of basic things fail because of this – how could you log in to a site, for example, if it didn&rsquo;t remember you? This is where sessions come into play. The server creates a unique ID (or UID) for each visitor and stores it in a hash table. This value is served back up to users to identify them, either in a cookie or (more rarely) in the URI itself. A <em>cookie</em> is returned as part of the header – it&rsquo;s just a string inside the header. A cookie sent by a particular site can only be read from the browser by that site. So how do you use sessions in Sinatra? <code>sample_app.rb</code>:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ruby data-lang=ruby><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SampleApp</span> <span style=color:#f92672>&lt;</span> <span style=color:#66d9ef>Sinatra</span><span style=color:#f92672>::</span><span style=color:#66d9ef>Base</span>
+  enable <span style=color:#e6db74>:sessions</span>
+
+  get <span style=color:#e6db74>&#39;/&#39;</span> <span style=color:#66d9ef>do</span>
+    @number <span style=color:#f92672>=</span> session
+    erb <span style=color:#e6db74>:index</span>
+  <span style=color:#66d9ef>end</span>
+
+  get <span style=color:#e6db74>&#39;/a/:number&#39;</span> <span style=color:#66d9ef>do</span> <span style=color:#f92672>|</span>number<span style=color:#f92672>|</span>
+    session<span style=color:#f92672>[</span><span style=color:#e6db74>&#39;number&#39;</span><span style=color:#f92672>]</span> <span style=color:#f92672>=</span> number
+    redirect to <span style=color:#e6db74>&#39;/&#39;</span>
+  <span style=color:#66d9ef>end</span>
+<span style=color:#66d9ef>end</span>
+</code></pre></div><p>Bear in mind that sessions have a hard limit of 4KB! To store more than this, you would use a database &ndash; but that&rsquo;s a topic for another time.</p>
+</div>
+<div class=pagination>
+<div class=pagination__title>
+<span class=pagination__title-h>Read other posts</span>
+<hr>
+</div>
+<div class=pagination__buttons>
+<span class="button previous">
+<a href=https://henrystanley.com/makers-academy/>
+<span class=button__icon>←</span>
+<span class=button__text>Makers Academy</span>
+</a>
+</span>
+<span class="button next">
+<a href=https://henrystanley.com/goodbye-little-printer/>
+<span class=button__text>Goodbye, Little Printer</span>
+<span class=button__icon>→</span>
+</a>
+</span>
+</div>
+</div>
+</div>
+</div>
+<footer class=footer>
+<div class=footer__inner>
+<a href=/ class=logo style=text-decoration:none>
+<span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg>
+</span>
+<span class=logo__text>Henry Stanley</span>
+<span class=logo__cursor></span>
+</a>
+<div class=copyright>
+<span>© 2021 Powered by
+<a href=https://gohugo.io target=_blank rel=noopener>Hugo</a></span>
+<span>Theme created by
+<a href=https://twitter.com/panr target=_blank rel=noopener>panr</a></span>
+</div>
+</div>
+</footer>
+<script src=https://henrystanley.com/assets/main.js></script>
+<script src=https://henrystanley.com/assets/prism.js></script>
+</div>
+</body>
+</html>

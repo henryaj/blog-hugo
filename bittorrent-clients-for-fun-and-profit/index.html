@@ -1,0 +1,194 @@
+<!doctype html><html lang=en>
+<head>
+<title>
+BitTorrent clients for fun and profit ::
+Henry Stanley
+</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="This is a work in progress.
+&amp;hellip;well, not really for profit. The world doesn&amp;rsquo;t need another BitTorrent client. But it&amp;rsquo;s a great project for learning about an interesting web protocol, exploring the networking stack, getting to grips with Wireshark and debugging, and learning how things work.
+Reading a .torrent The torrent files you might find somewhere like The Pirate Bay are encoded with bencode (pronounced &amp;ldquo;B-Encode&amp;rdquo;, but I&amp;rsquo;m still gonna say &amp;ldquo;ben-code&amp;rdquo;), a terse file format for representing a few simple data structures (strings, ints, dicts and lists).">
+<meta name=keywords content>
+<meta name=robots content="noodp">
+<link rel=canonical href=https://henrystanley.com/bittorrent-clients-for-fun-and-profit/>
+<link rel=stylesheet href=https://henrystanley.com/assets/style.css>
+<link rel=stylesheet href=https://henrystanley.com/style.css>
+<link rel=apple-touch-icon-precomposed sizes=144x144 href=https://henrystanley.com/img/apple-touch-icon-144-precomposed.png>
+<link rel="shortcut icon" href=https://henrystanley.com/img/favicon.png>
+<link href=https://henrystanley.com/assets/fonts/Inter-Italic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Regular.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Medium.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-MediumItalic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Bold.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-BoldItalic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="BitTorrent clients for fun and profit">
+<meta name=twitter:description content="This is a work in progress.
+&mldr;well, not really for profit. The world doesn&rsquo;t need another BitTorrent client. But it&rsquo;s a great project for learning about an interesting web protocol, exploring the networking stack, getting to grips with Wireshark and debugging, and learning how things work.
+Reading a .torrent The torrent files you might find somewhere like The Pirate Bay are encoded with bencode (pronounced &ldquo;B-Encode&rdquo;, but I&rsquo;m still gonna say &ldquo;ben-code&rdquo;), a terse file format for representing a few simple data structures (strings, ints, dicts and lists).">
+<meta property="og:title" content="BitTorrent clients for fun and profit">
+<meta property="og:description" content="This is a work in progress.
+&mldr;well, not really for profit. The world doesn&rsquo;t need another BitTorrent client. But it&rsquo;s a great project for learning about an interesting web protocol, exploring the networking stack, getting to grips with Wireshark and debugging, and learning how things work.
+Reading a .torrent The torrent files you might find somewhere like The Pirate Bay are encoded with bencode (pronounced &ldquo;B-Encode&rdquo;, but I&rsquo;m still gonna say &ldquo;ben-code&rdquo;), a terse file format for representing a few simple data structures (strings, ints, dicts and lists).">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://henrystanley.com/bittorrent-clients-for-fun-and-profit/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-05-23T16:12:18-04:00">
+<meta property="article:modified_time" content="2018-05-23T16:12:18-04:00"><meta property="og:site_name" content="Henry Stanley">
+</head>
+<body>
+<div class=container>
+<header class=header>
+<span class=header__inner>
+<a href=/ class=logo style=text-decoration:none>
+<span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg>
+</span>
+<span class=logo__text>Henry Stanley</span>
+<span class=logo__cursor></span>
+</a>
+<span class=header__right>
+<nav class=menu>
+<ul class="menu__inner menu__inner--desktop">
+<li><a href=/post>Archive</a></li>
+</ul>
+<ul class="menu__inner menu__inner--mobile">
+<li><a href=/post>Archive</a></li>
+</ul>
+</nav>
+<span class=menu-trigger><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+</span>
+<span class=theme-toggle><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 41c10.4934.0 19-8.5066 19-19C41 11.5066 32.4934 3 22 3 11.5066 3 3 11.5066 3 22s8.5066 19 19 19zM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22z"/></svg>
+</span>
+</span>
+</span>
+</header>
+<div class=content>
+<div class=post>
+<h1 class=post-title>BitTorrent clients for fun and profit</h1>
+<div class=post-meta>
+<span class=post-date>
+2018-05-23
+</span>
+<span class=post-read-time>— 3 min read</span>
+</div>
+<div class=post-content>
+<p><em>This is a work in progress.</em></p>
+<p>&mldr;well, not really for profit. The world doesn&rsquo;t need another BitTorrent client. But it&rsquo;s a great project for learning about an interesting web protocol, exploring the networking stack, getting to grips with Wireshark and debugging, and learning how things work.</p>
+<h2 id=reading-a-torrent>Reading a <code>.torrent</code></h2>
+<p>The torrent files you might find somewhere like The Pirate Bay are encoded with <a href=https://en.wikipedia.org/wiki/Bencode>bencode</a> (pronounced &ldquo;B-Encode&rdquo;, but I&rsquo;m still gonna say &ldquo;ben-code&rdquo;), a terse file format for representing a few simple data structures (strings, ints, dicts and lists).</p>
+<p>A bencoded file might look like this:</p>
+<pre tabindex=0><code>dl10:hello dave!d3:foo3:bar4:fizz4:buzzei42eee
+</code></pre><p>Tasty. Let&rsquo;s add newlines for effect:</p>
+<pre tabindex=0><code>d
+  4:info
+  l
+    10:hello dave!
+    d
+      3:foo3:bar
+      4:fizz4:buzz
+    e
+    i42e
+  e
+e
+</code></pre><p>Elements in a bencoded structure have a letter denoting what they are: <code>d</code> for dicts, <code>l</code> for lists, <code>i</code> for ints. All of those are terminated with a trailing <code>e</code>. Strings are a little different: they start with the length of the string, then a colon, followed by the string itself (e.g. <code>3:foo</code>).</p>
+<p>In the above example, the root of the structure is a dict with one key (&ldquo;info&rdquo;) whose value is a list containing a string, a dict and an int.</p>
+<p>Writing a decoder for this is an interesting exercise in itself; in the end, I used <a href=https://github.com/jackpal/bencode-go>jackpal/bencode-go</a>.</p>
+<p>Here&rsquo;s what a JSON output of this file might look like (I&rsquo;m using a Ubuntu image torrent):</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+    <span style=color:#f92672>&#34;announce&#34;</span>: <span style=color:#e6db74>&#34;http://torrent.ubuntu.com:6969/announce&#34;</span>,
+    <span style=color:#f92672>&#34;announce-list&#34;</span>: [
+        [
+            <span style=color:#e6db74>&#34;http://torrent.ubuntu.com:6969/announce&#34;</span>
+        ],
+        [
+            <span style=color:#e6db74>&#34;http://ipv6.torrent.ubuntu.com:6969/announce&#34;</span>
+        ]
+    ],
+    <span style=color:#f92672>&#34;comment&#34;</span>: <span style=color:#e6db74>&#34;Ubuntu CD releases.ubuntu.com&#34;</span>,
+    <span style=color:#f92672>&#34;creation date&#34;</span>: <span style=color:#ae81ff>1524776308</span>,
+    <span style=color:#f92672>&#34;info&#34;</span>: {
+        <span style=color:#f92672>&#34;length&#34;</span>: <span style=color:#ae81ff>1921843200</span>,
+        <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;ubuntu-18.04-desktop-amd64.iso&#34;</span>,
+        <span style=color:#f92672>&#34;piece length&#34;</span>: <span style=color:#ae81ff>524288</span>,
+        <span style=color:#f92672>&#34;pieces&#34;</span>: <span style=color:#e6db74>&#34;\ufffd &lt;truncated&gt; \ufffd&#34;</span>
+    }
+}
+</code></pre></div><h2 id=talk-to-the-tracker>Talk to the tracker</h2>
+<p>Next, we need to make a request to the tracker to find some peers to connect to. The tracker URL is in the &ldquo;announce&rdquo; field of the metadata.</p>
+<p>When first trying this, I got an HTTP 400 and the following error:</p>
+<p><code>you sent me garbage - id not of length 20</code></p>
+<p>Damn. This tracker is so SALTY.</p>
+<p>Making a correct request to the tracker requires URL-encoding a bunch of params, including a SHA1 hash of the bencoded &ldquo;info&rdquo; section of the torrent metadata. The flow looks something like:</p>
+<ol>
+<li>de-bencode torrent metadata</li>
+<li>extract the &ldquo;announce&rdquo; address</li>
+<li>re-bencode the &ldquo;info&rdquo; block</li>
+<li>generate a random 20-byte peer ID:</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-golang data-lang=golang><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>newClientID</span>() []<span style=color:#66d9ef>byte</span> {
+	<span style=color:#a6e22e>clientID</span> <span style=color:#f92672>:=</span> make([]<span style=color:#66d9ef>byte</span>, <span style=color:#ae81ff>20</span>)
+	<span style=color:#a6e22e>rand</span>.<span style=color:#a6e22e>Read</span>(<span style=color:#a6e22e>clientID</span>)
+	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>clientID</span>
+}
+</code></pre></div><ol>
+<li>make a GET request to the announce URL with a bunch of query params:</li>
+</ol>
+<pre tabindex=0><code>&quot;info_hash&quot;: &lt;bencoded, hashed &quot;info&quot; block&gt;
+&quot;peer_id&quot;:   &lt;unique peer ID&gt;
+&quot;port&quot;:      &lt;port you're listening for connection on&gt;
+&quot;uploaded&quot;:  &lt;number of bytes uploaded&gt;
+&quot;left&quot;:      &lt;number of bytes left to download&gt;
+&quot;compact&quot;:   &lt;1 if using compact mode&gt;
+&quot;event&quot;:     &lt;one of 'started', 'completed', or 'stopped'&gt;
+</code></pre><ol>
+<li>de-bencode the response from the tracker, which contains a list of peers in the torrent swarm.</li>
+</ol>
+<h2 id=handshaking-with-peers>Handshaking with peers</h2>
+<p>Next, we have to handshake with some subset of the peers the tracker has told us about.</p>
+<p>We open a TCP connection to the peer, and send the following message:</p>
+<p><img src=/images/bittorrent_handshake.jpg alt="Peer handshake message"></p>
+<p><em>To be continued&mldr;</em></p>
+</div>
+<div class=pagination>
+<div class=pagination__title>
+<span class=pagination__title-h>Read other posts</span>
+<hr>
+</div>
+<div class=pagination__buttons>
+<span class="button previous">
+<a href=https://henrystanley.com/learning-programming-languages-with-spaced-repetition/>
+<span class=button__icon>←</span>
+<span class=button__text>Learning Programming Languages with Spaced Repetition</span>
+</a>
+</span>
+<span class="button next">
+<a href=https://henrystanley.com/last-chance-see-an-iridium-flare/>
+<span class=button__text>Last chance – see an Iridium flare</span>
+<span class=button__icon>→</span>
+</a>
+</span>
+</div>
+</div>
+</div>
+</div>
+<footer class=footer>
+<div class=footer__inner>
+<a href=/ class=logo style=text-decoration:none>
+<span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg>
+</span>
+<span class=logo__text>Henry Stanley</span>
+<span class=logo__cursor></span>
+</a>
+<div class=copyright>
+<span>© 2021 Powered by
+<a href=https://gohugo.io target=_blank rel=noopener>Hugo</a></span>
+<span>Theme created by
+<a href=https://twitter.com/panr target=_blank rel=noopener>panr</a></span>
+</div>
+</div>
+</footer>
+<script src=https://henrystanley.com/assets/main.js></script>
+<script src=https://henrystanley.com/assets/prism.js></script>
+</div>
+</body>
+</html>

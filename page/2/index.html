@@ -1,0 +1,173 @@
+<!doctype html><html lang=en>
+<head>
+<meta name=generator content="Hugo 0.89.4">
+<title>
+Henry Stanley
+</title>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content>
+<meta name=keywords content>
+<meta name=robots content="noodp">
+<link rel=canonical href=https://henrystanley.com/>
+<link rel=stylesheet href=https://henrystanley.com/assets/style.css>
+<link rel=stylesheet href=https://henrystanley.com/style.css>
+<link rel=apple-touch-icon-precomposed sizes=144x144 href=https://henrystanley.com/img/apple-touch-icon-144-precomposed.png>
+<link rel="shortcut icon" href=https://henrystanley.com/img/favicon.png>
+<link href=https://henrystanley.com/assets/fonts/Inter-Italic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Regular.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Medium.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-MediumItalic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-Bold.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<link href=https://henrystanley.com/assets/fonts/Inter-BoldItalic.woff2 rel=preload type=font/woff2 as=font crossorigin>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Henry Stanley">
+<meta name=twitter:description content>
+<meta property="og:title" content="Henry Stanley">
+<meta property="og:description" content>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://henrystanley.com/"><meta property="og:site_name" content="Henry Stanley">
+<link rel=alternate type=application/rss+xml href=/feed.xml title="Henry Stanley">
+</head>
+<body>
+<div class=container>
+<header class=header>
+<span class=header__inner>
+<a href=/ class=logo style=text-decoration:none>
+<span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg>
+</span>
+<span class=logo__text>Henry Stanley</span>
+<span class=logo__cursor></span>
+</a>
+<span class=header__right>
+<nav class=menu>
+<ul class="menu__inner menu__inner--desktop">
+<li><a href=/post>Archive</a></li>
+</ul>
+<ul class="menu__inner menu__inner--mobile">
+<li><a href=/post>Archive</a></li>
+</ul>
+</nav>
+<span class=menu-trigger><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+</span>
+<span class=theme-toggle><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 41c10.4934.0 19-8.5066 19-19C41 11.5066 32.4934 3 22 3 11.5066 3 3 11.5066 3 22s8.5066 19 19 19zM7 22C7 13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22z"/></svg>
+</span>
+</span>
+</span>
+</header>
+<div class=content>
+<div class=posts>
+<div class="post on-list">
+<h1 class=post-title><a href=https://henrystanley.com/a-buildpack-for-graalvm/>A Buildpack for GraalVM</a></h1>
+<div class=post-meta>
+<span class=post-date>
+2018-08-09
+</span>
+<span class=post-read-time>— 4 min read</span>
+</div>
+<div class=post-content>
+tl;dr: Deploy your Ruby code to Heroku and have it run on GraalVM.
+When deploying code in this brave new cloud world we live in, your app pretty much runs as a brain in a vat. It doesn&rsquo;t (and shouldn&rsquo;t) know about the hardware it&rsquo;s running on, how the services it connects to are implemented, how it send data to your log aggregation tool, and so on.1
+You get to choose between providing the brain and the vat, or just the brain.
+</div>
+<div><a class="read-more button" href=/a-buildpack-for-graalvm/>Read more →</a></div>
+</div>
+<div class="post on-list">
+<h1 class=post-title><a href=https://henrystanley.com/getting-started-with-graal/>Getting started with Graal</a></h1>
+<div class=post-meta>
+<span class=post-date>
+2018-07-30
+</span>
+<span class=post-read-time>— 3 min read</span>
+</div>
+<div class=post-content>
+GraalVM promises to be &ldquo;one VM to rule them all&rdquo; – a way to &ldquo;run code faster anywhere&rdquo;.
+The way it does this is using language interpreters written in a framework called Truffle:
+Truffle is a framework for implementing languages using nothing more than a simple abstract syntax tree interpreter.
+These interpreters turn your code into an AST which can be run on the GraalVM. This gives you:
+</div>
+<div><a class="read-more button" href=/getting-started-with-graal/>Read more →</a></div>
+</div>
+<div class="post on-list">
+<h1 class=post-title><a href=https://henrystanley.com/multi-file-wordcount-an-exercise-in-concurrent-ruby/>Multi-file wordcount – an exercise in concurrent Ruby</a></h1>
+<div class=post-meta>
+<span class=post-date>
+2018-07-17
+</span>
+<span class=post-read-time>— 4 min read</span>
+</div>
+<div class=post-content>
+Web frameworks have TodoMVC as a standard exercise, in which you build a little to-do list app. It&rsquo;s a cute way to showcase the features of that framework and get to know it a little better.
+My friend Dan Friedman is trying to do the same but for programming languages, with concurrent-wc! It&rsquo;s an exercise to build a utility that mimicks wc -l (which counts the lines in a file), but applied to a whole directory – which is a nice excuse to use some concurrency!
+</div>
+<div><a class="read-more button" href=/multi-file-wordcount-an-exercise-in-concurrent-ruby/>Read more →</a></div>
+</div>
+<div class="post on-list">
+<h1 class=post-title><a href=https://henrystanley.com/tracking-physical-presence-with-packet-sniffing/>Tracking physical presence with packet sniffing</a></h1>
+<div class=post-meta>
+<span class=post-date>
+2018-06-26
+</span>
+<span class=post-read-time>— 4 min read</span>
+</div>
+<div class=post-content>
+I wanted a way to see who was in the Recurse Center space at any given time – or to be able to check if people were in before deciding whether I wanted to take the L to Manhattan (on a weekend, say).
+Wi-fi is nearby I figure someone being connected to the Recurse Center Wi-Fi is a pretty good proxy for whether or not they&rsquo;re in the space.
+Every packet your machine sends out has a source and destination MAC address written into it.
+</div>
+<div><a class="read-more button" href=/tracking-physical-presence-with-packet-sniffing/>Read more →</a></div>
+</div>
+<div class="post on-list">
+<h1 class=post-title><a href=https://henrystanley.com/geoffrey-miller-on-polyamory/>Geoffrey Miller on polyamory</a></h1>
+<div class=post-meta>
+<span class=post-date>
+2018-06-25
+</span>
+<span class=post-read-time>— 7 min read</span>
+</div>
+<div class=post-content>
+I really liked Geoffrey Miller&rsquo;s paean to polyamory on Sam Harris' recent podcast. I&rsquo;ve quoted it below; I hope he won&rsquo;t mind me reproducing it here.
+Humans have an innate tendency to form long-term pair bonds, no doubt. Pair bonds are extremely important in human evolution: people finding mates, settling down, having a little home, raising kids together, bi-parental care, dads investing&mldr;
+So: I&rsquo;m not going to go dis monogamy.
+</div>
+<div><a class="read-more button" href=/geoffrey-miller-on-polyamory/>Read more →</a></div>
+</div>
+<div class=pagination>
+<div class=pagination__buttons>
+<span class="button previous">
+<a href=/>
+<span class=button__icon>←</span>
+<span class=button__text>Newer posts</span>
+</a>
+</span>
+<span class="button next">
+<a href=/page/3/>
+<span class=button__text>Older posts</span>
+<span class=button__icon>→</span>
+</a>
+</span>
+</div>
+</div>
+</div>
+</div>
+<footer class=footer>
+<div class=footer__inner>
+<a href=/ class=logo style=text-decoration:none>
+<span class=logo__mark><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44"><path fill="none" d="M15 8l14.729 14.382L15 35.367"/></svg>
+</span>
+<span class=logo__text>Henry Stanley</span>
+<span class=logo__cursor></span>
+</a>
+<div class=copyright>
+<span>© 2021 Powered by
+<a href=https://gohugo.io target=_blank rel=noopener>Hugo</a></span>
+<span>Theme created by
+<a href=https://twitter.com/panr target=_blank rel=noopener>panr</a></span>
+</div>
+</div>
+</footer>
+<script src=https://henrystanley.com/assets/main.js></script>
+<script src=https://henrystanley.com/assets/prism.js></script>
+</div>
+</body>
+</html>
